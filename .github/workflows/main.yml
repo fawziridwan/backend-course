@@ -1,0 +1,61 @@
+name: Backend Course Testing Include Automated Testing in Github
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.18.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Run tests coverage
+        run: npm run test:coverage 
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' # Deploy only on main branch
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.18.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Copy .env file
+        run: |
+          echo "${{ secrets.DOT_ENV }}" > .env
+          cat .env
+
+      - name: Deploy
+        run: |
+          # Add your deployment commands here
+          echo "Deploying to server..."
+          # Example: using SSH to deploy to a server
+          # ssh -i ${{ secrets.SSH_PRIVATE_KEY }} user@server '
+          #   cd /path/to/your/app;
+          #   git pull;
+          #   npm install;
+          #   pm2 restart app-name
+          # '

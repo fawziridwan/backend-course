@@ -22,9 +22,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Start Server
-        run: npm run start
-
       - name: API testing
         run: npm run test
 

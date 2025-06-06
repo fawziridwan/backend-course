@@ -1,33 +1,35 @@
 name: run api testing
 on:
-    push:
-        branches: [dev, stage, master]
-    pull_request:
-        branches: [master]
+  push:
+    branches: [dev, stage, master]
+  pull_request:
+    branches: [master]
 
 jobs:
-    api-test:
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [20.x]
-        steps:
-            - uses: actions/checkout@v2
+  api-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v2
 
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v1
-              with:
-                  node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-            - name: Install Dependencies
-              run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-            - name: Start Server
-              run: npm run start
+      - name: force install nodemon
+        run: sudo npm install -g --force nodemon
 
-            - name: API testing
-              run: npm run test
+      - name: Start Server
+        run: npm run start
 
-            - name: Run Test Coverage
-              run: npm run test:coverage
-              
+      - name: API testing
+        run: npm run test
+
+      - name: Run Test Coverage
+        run: npm run test:coverage

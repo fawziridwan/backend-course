@@ -22,9 +22,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: force install nodemon
-        run: sudo npm install -g --force nodemon
-
       - name: Start Server
         run: npm run start
 

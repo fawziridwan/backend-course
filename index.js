@@ -17,6 +17,4 @@ app.get("/", (req, res) => {
   res.status(200).send("Health Check");
 });
 
-
-
 module.exports = app;

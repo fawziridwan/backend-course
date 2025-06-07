@@ -1,7 +1,6 @@
 const request = require("supertest");
 const app = require("./../index");
 const { generateUser } = require("../utils/fake_user");
-const { updateEnvWithUserData } = require("../utils/updateEnv");
 const user = generateUser();
 
 describe("POST /api/v1/register", () => {
@@ -15,12 +14,6 @@ describe("POST /api/v1/register", () => {
       })
       .set("Accept", "application/json");
     const data = response.body;
-
-    updateEnvWithUserData({
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    });
 
     expect(response.statusCode).toBe(201);
     expect(data.success).toBe(true);
@@ -37,9 +30,9 @@ describe("POST /api/v1/register", () => {
     const response = await request(app)
       .post("/api/v1/register")
       .send({
-        name: `${process.env.NAME}`,
-        email: `${process.env.EMAIL}`,
-        password: `${process.env.PASSWORD}`,
+        name: "Sydney",
+        email: "Clarabelle@yopmail.com",
+        password: "bcjZ6ntIO8dP2JD",
       })
       .set("Accept", "application/json");
     const data = response.body;

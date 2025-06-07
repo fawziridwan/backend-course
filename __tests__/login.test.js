@@ -9,8 +9,8 @@ describe("POST /api/v1/login", () => {
     const response = await request(app)
       .post("/api/v1/login")
       .send({
-        email: `${process.env.EMAIL}`,
-        password: `${process.env.PASSWORD}`,
+        email: "Clarabelle@yopmail.com",
+        password: "bcjZ6ntIO8dP2JD",
       })
       .set("Accept", "application/json");
     const data = response.body;
@@ -26,7 +26,7 @@ describe("POST /api/v1/login", () => {
       .post("/api/v1/login")
       .send({
         email: "invalidemail@yopmail.com",
-        password: `${process.env.PASSWORD}`,
+        password: "bcjZ6ntIO8dP2JD",
       })
       .set("Accept", "application/json");
     const data = response.body;
@@ -39,7 +39,7 @@ describe("POST /api/v1/login", () => {
     const response = await request(app)
       .post("/api/v1/login")
       .send({
-        email: `${process.env.EMAIL}`,
+        email: "Clarabelle@yopmail.com",
         password: "P@sswo1rd",
       })
       .set("Accept", "application/json");
@@ -53,8 +53,8 @@ describe("POST /api/v1/login", () => {
     const response = await request(app)
       .post("/api/v1/login_mock")
       .send({
-        email: `${process.env.EMAIL}`,
-        password: `${process.env.PASSWORD}`,
+        email: "Clarabelle@yopmail.com",
+        password: "bcjZ6ntIO8dP2JD",
       })
       .set("Accept", "application/json");
     const data = response.body;

@@ -37,11 +37,11 @@ app.get("/", async (req, res) => {
   const client = await pool.connect();
 
   try {
-  return res.status(200).send({
-    statusCode: 200,
-    message: "Api is Running",
-    success: true,
-  });
+    return res.status(200).send({
+      statusCode: 200,
+      message: "Api is Running",
+      success: true,
+    });
   } catch (error) {
     return res.status(404).send({
       statusCode: 404,
@@ -53,5 +53,9 @@ app.get("/", async (req, res) => {
   }
 });
 
-// module.exports = app;
-module.exports.handler = serverless(app);
+// Export the app for local development
+if (process.env.NODE_ENV !== 'serverless') {
+  module.exports = app;
+} else {
+  module.exports.handler = serverless(app);
+}

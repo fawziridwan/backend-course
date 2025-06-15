@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv").config;
 const bodyParser = require("body-parser");
+const serverless = require("serverless-http");
+
 const app = express();
 
 //import router
@@ -34,43 +36,22 @@ app.use("/api/v1", router);
 app.get("/", async (req, res) => {
   const client = await pool.connect();
 
-  // try {
+  try {
   return res.status(200).send({
     statusCode: 200,
     message: "Api is Running",
     success: true,
   });
-  // } catch (error) {
-  //   return res.status(404).send({
-  //     statusCode: 404,
-  //     message: "Not Found",
-  //     success: false,
-  //   });
-  // } finally {
-  //   client.release();
-  // }
-
-  // try {
-  // const result = await client.query("SELECT * FROM users");
-
-  //   res.status(200).json({
-  //     statusCode: 200,
-  //     message: "Success",
-  //     success: true,
-  //     data: result.rows,
-  //   });
-
-  // } catch (error) {
-  //   console.log(error);
-  // } finally {
-  //   client.release();
-  // }
-
-  // res.status(404).json({
-  //   statusCode: 404,
-  //   message: "Not Found",
-  //   success: false,
-  // });
+  } catch (error) {
+    return res.status(404).send({
+      statusCode: 404,
+      message: "Not Found",
+      success: false,
+    });
+  } finally {
+    client.release();
+  }
 });
 
-module.exports = app;
+// module.exports = app;
+module.exports.handler = serverless(app);

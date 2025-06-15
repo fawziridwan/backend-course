@@ -5,3 +5,5 @@ kredensial_dbfree.txt
 db_belajar_express.sql
 .env.local
 .env
+# Local Netlify folder
+.netlify

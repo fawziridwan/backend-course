@@ -12,7 +12,6 @@ const jwt = require("jsonwebtoken");
 
 //import prisma client
 const prisma = require("../prisma/client");
-const { response } = require("..");
 
 //function login
 const login = async (req, res) => {

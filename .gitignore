@@ -7,3 +7,8 @@ db_belajar_express.sql
 .env
 # Local Netlify folder
 .netlify
+/generated/prisma
+.env.prod
+/generated/prisma
+
+/generated/prisma
